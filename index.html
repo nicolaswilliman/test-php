@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+  <div id="main">
+
+  </div>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+          type: "GET",
+          url: "test.php",
+          async: true,
+          success: function(response) {
+            $('#main').html(`<h1>${response}</h1>`)
+          },
+          error: function(error, status) {
+            console.log(error);
+          },
+      });
+      element = getElemnt()
+      element.cuando('click',function() {
+        $.ajax({
+          type: "POST",
+          url: "enviar_data.php",
+          data: {
+            a: '1',
+            b: 'hola',
+          }
+          success: function(response) {
+            console.log(response);
+          },
+        })
+      });
+      console.log('Log de la pagina')
+    });
+  </script>
+</body>
+</html>
