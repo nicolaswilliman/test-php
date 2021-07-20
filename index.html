@@ -9,36 +9,40 @@
 </head>
 <body>
   <div id="main">
-
+    <div>
+      <span>Nombre</span>
+      <input type="text" id="x">
+    </div>
+    <div>
+      <span>Apellido</span>
+      <input type="text" id="y">
+    </div>
+    <input type="button" value="Enviar" id="button">
   </div>
   <script>
     $(document).ready(function() {
-      $.ajax({
-          type: "GET",
-          url: "test.php",
-          async: true,
-          success: function(response) {
-            $('#main').html(`<h1>${response}</h1>`)
-          },
-          error: function(error, status) {
-            console.log(error);
-          },
+      $('#button').on('click', () => {
+        try {
+          const nombre = $('#nombre').val();
+          const apellido = $('#apellido').val();
+          if (!nombre) throw new Error('Nombre invalido');
+          if (!apellido) throw new Error('apellido invalido');
+          const data = {
+            nombre,
+            apellido,
+          };
+
+          $.post({
+            url: 'users.php',
+            data,
+            success: response => {
+              console.log(response);
+            },
+          });
+        } catch (error) {
+          console.error(error);
+        }
       });
-      element = getElemnt()
-      element.cuando('click',function() {
-        $.ajax({
-          type: "POST",
-          url: "enviar_data.php",
-          data: {
-            a: '1',
-            b: 'hola',
-          }
-          success: function(response) {
-            console.log(response);
-          },
-        })
-      });
-      console.log('Log de la pagina')
     });
   </script>
 </body>
