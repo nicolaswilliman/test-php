@@ -5,4 +5,10 @@ services:
     volumes:
       - .:/var/www/html/
     ports:
-      - '3000:80'
+      - 3000:80
+  db:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    ports:
+      - 3306:3306

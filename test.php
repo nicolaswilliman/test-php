@@ -1,13 +1,11 @@
 <?php
 
-$mysql_connection = connect_mysql
+$conn = new mysqli('db', 'root', null, 'db');
 
-$mysql_connection->obtener('usuarios')
-
-function getData() {
-  $data = 'Informacion';
-  return $data;
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
 }
 
-echo "Hola!";
-echo "Chau!";
+echo 'Success';
+
+exit;
